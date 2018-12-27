@@ -1,9 +1,8 @@
 """
-Billy Bass stuff
+Billy Bass Script for moving the body
 """
 
 import time
-import random
 import threading
 try:
     import queue as Queue
@@ -29,9 +28,9 @@ class Billy:
         self.next.set()
         self.queue.put(f)
 
-    def speak(self):
+    def think(self):
         self.next.set()
-        self.queue.put(self._speak)
+        self.queue.put(self._think)
 
     def off(self):
         self.next.set()
@@ -45,20 +44,16 @@ class Billy:
     def _wakeup(self):
         self.motor.motor2.throttle = 1.0
 
-    def _speak(self):
-        self._wakeup()
+    def _think(self):
         self.next.clear()
         while not self.next.is_set():
-            self.motor.motor1.throttle = 1
-            time.sleep(random.uniform(0.05, 0.15))
-            self.motor.motor1.throttle = -1
-            time.sleep(random.uniform(0.05, 0.15))
-            self.motor.motor1.throttle = 0
-            time.sleep(random.uniform(0.05, 0.25))
+            self.motor.motor2.throttle = -1
+            time.sleep(0.1)
+            self.motor.motor2.throttle = 0
+            time.sleep(0.1)
         # self._off()
 
     def _off(self):
-        self.motor.motor1.throttle = 0
         self.motor.motor2.throttle = -0.2
         time.sleep(0.2)
         self.motor.motor2.throttle = 0
