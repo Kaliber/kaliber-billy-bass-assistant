@@ -36,7 +36,6 @@ try:
 except NameError:
     FileNotFoundError = IOError
 
-
 WARNING_NOT_REGISTERED = """
     This device is not registered. This means you will not be able to use
     Device Actions or see your device in Assistant Settings. In order to
@@ -61,7 +60,7 @@ def process_event(event):
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
         billy.wakeup()
-        
+
     if event.type == EventType.ON_CONVERSATION_TURN_TIMEOUT:
         billy.off()
 
@@ -72,7 +71,6 @@ def process_event(event):
 
     if event.type == EventType.ON_RESPONDING_STARTED:
         billy.wakeup()
-        print("start audio script")
 
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
             event.args and not event.args['with_follow_on_turn']):

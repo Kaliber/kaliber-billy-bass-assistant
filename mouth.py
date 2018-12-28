@@ -54,10 +54,12 @@ while not parec.stdout.closed:
     if COUNTER % 60 == 0:
       sample_average = sum(SAMPLE_ARRAY, 0.0) / len(SAMPLE_ARRAY)
 
-      if abs(sample_average) > SAMPLE_THRESHOLD:
+      if abs(sample_average) >= SAMPLE_THRESHOLD and MOUTH_STATE != 'open':
           kit.motor1.throttle = -1
-      else:
+          MOUTH_STATE = 'open'
+      elif abs(sample_average) < SAMPLE_THRESHOLD and MOUTH_STATE != 'closed':
           kit.motor1.throttle = 1
+          MOUTH_STATE = 'closed'
 
       SAMPLE_ARRAY = []
       COUNTER = 0
