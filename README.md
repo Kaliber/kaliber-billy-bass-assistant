@@ -150,3 +150,32 @@ So Google delivers a better script for the hotword project. So we use that scrip
 
 ## Setting up script after boot and WiFi connection
 @TODO: https://raspberrypi.stackexchange.com/questions/78991/running-a-script-after-an-internet-connection-is-established
+
+`sudo systemctl edit --force --full start-google-assistant.service`
+
+Paste the following code
+
+```
+[Unit]
+Description=Google Assistant Service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/kaliber-billy-bassistant/
+ExecStart=/home/pi/kaliber-billy-bassistant/start_google_assistant.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Check stutus of the service
+`systemctl status start-google-assistant.service`
+
+Enable the service
+`sudo systemctl enable my_script.service`
+
+Start the service
+`sudo systemctl start my_script.service`
