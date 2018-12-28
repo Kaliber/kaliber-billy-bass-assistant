@@ -48,9 +48,9 @@ class Billy:
         self.next.clear()
         while not self.next.is_set():
             self.motor.motor2.throttle = -1
-            time.sleep(0.1)
+            time.sleep(0.15)
             self.motor.motor2.throttle = 0
-            time.sleep(0.1)
+            time.sleep(0.15)
         # self._off()
 
     def _off(self):

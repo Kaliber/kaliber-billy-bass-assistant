@@ -35,7 +35,7 @@ PA_CHANNELS = 1 # Mono
 PA_RATE = 1000 # Hz
 PA_LATENCY=4
 
-SAMPLE_THRESHOLD = 2
+SAMPLE_THRESHOLD = 12
 COUNTER = 0
 
 # Capture audio using `pacat` -- PyAudio looked like a cleaner choice but
@@ -47,22 +47,17 @@ parec = subprocess.Popen(["/usr/bin/pacat", "--record", "--device="+PA_SOURCE,
 
 while not parec.stdout.closed:
     # Mono audio with 1 byte per sample makes parsing trivial
-    sample = ord(parec.stdout.read(1)) - 120
+    sample = ord(parec.stdout.read(1)) - 128
     COUNTER += 1
     SAMPLE_ARRAY.append(sample)
 
-    if COUNTER % 50 == 0:
+    if COUNTER % 60 == 0:
       sample_average = sum(SAMPLE_ARRAY, 0.0) / len(SAMPLE_ARRAY)
-      #print(sample_average)
 
-      if abs(sample_average) >= SAMPLE_THRESHOLD and MOUTH_STATE == 'closed':
-        #print('open')
-        kit.motor1.throttle = 1.0
-        MOUTH_STATE = 'open'
-      elif abs(sample_average) < SAMPLE_THRESHOLD and MOUTH_STATE == 'open':
-        #print('close')
-        kit.motor1.throttle = 0
-        MOUTH_STATE = 'closed'
+      if abs(sample_average) > SAMPLE_THRESHOLD:
+          kit.motor1.throttle = -1
+      else:
+          kit.motor1.throttle = 1
 
       SAMPLE_ARRAY = []
       COUNTER = 0

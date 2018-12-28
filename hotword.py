@@ -61,6 +61,9 @@ def process_event(event):
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
         billy.wakeup()
+        
+    if event.type == EventType.ON_CONVERSATION_TURN_TIMEOUT:
+        billy.off()
 
     print(event)
 
