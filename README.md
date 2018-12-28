@@ -149,7 +149,9 @@ So Google delivers a better script for the hotword project. So we use that scrip
 .....
 
 ## Setting up script after boot and WiFi connection
-@TODO: https://raspberrypi.stackexchange.com/questions/78991/running-a-script-after-an-internet-connection-is-established
+More info: https://raspberrypi.stackexchange.com/questions/78991/running-a-script-after-an-internet-connection-is-established
+
+### Google Assistant script
 
 `sudo systemctl edit --force --full start-google-assistant.service`
 
@@ -179,3 +181,33 @@ Enable the service
 
 Start the service
 `sudo systemctl start my_script.service`
+
+### Mouth script
+
+`sudo systemctl edit --force --full start-mouth-script.service`
+
+Paste the following code
+
+```
+[Unit]
+Description=Billy Bass Mouth Service
+After=sound.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/kaliber-billy-bassistant/
+ExecStart=/home/pi/kaliber-billy-bassistant/start_mouth_script.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Check stutus of the service
+`systemctl status start-mouth-script.service`
+
+Enable the service
+`sudo systemctl enable start-mouth-script.service`
+
+Start the service
+`sudo systemctl start start-mouth-script.service`
