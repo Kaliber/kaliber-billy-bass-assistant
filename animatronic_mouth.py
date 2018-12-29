@@ -55,17 +55,17 @@ while not parec.stdout.closed:
     SAMPLE_ARRAY.append(sample)
 
     if COUNTER % 75 == 0:
-      sample_average = sum(SAMPLE_ARRAY, 0.0) / len(SAMPLE_ARRAY)
+        sample_average = sum(SAMPLE_ARRAY, 0.0) / len(SAMPLE_ARRAY)
 
-      if abs(sample_average) >= SAMPLE_THRESHOLD and abs(sample_average) < 120 and MOUTH_STATE != 'open':
-          kit.motor1.throttle = -1
-          MOUTH_STATE = 'open'
-      elif abs(sample_average) < SAMPLE_THRESHOLD and MOUTH_STATE != 'closed':
-          kit.motor1.throttle = 1
-          MOUTH_STATE = 'closed'
-      elif abs(sample_average) > 120 and MOUTH_STATE != 'nothing':
-          kit.motor1.throttle = 0
-          MOUTH_STATE = 'nothing'
+        if abs(sample_average) >= SAMPLE_THRESHOLD and abs(sample_average) < 120 and MOUTH_STATE != 'open':
+            kit.motor1.throttle = -1
+            MOUTH_STATE = 'open'
+        elif abs(sample_average) < SAMPLE_THRESHOLD and MOUTH_STATE != 'closed':
+            kit.motor1.throttle = 1
+            MOUTH_STATE = 'closed'
+        elif abs(sample_average) > 120 and MOUTH_STATE != 'nothing':
+            kit.motor1.throttle = 0
+            MOUTH_STATE = 'nothing'
 
-      SAMPLE_ARRAY = []
-      COUNTER = 0
+        SAMPLE_ARRAY = []
+        COUNTER = 0
