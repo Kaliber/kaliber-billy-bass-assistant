@@ -39,6 +39,9 @@ Make sure you increase the record volume of the microphone to 100%. Also set the
 
 To make sure the SDK also works outside the virtual environment, run the command `pip3 install --upgrade -r requirements.txt` after a reboot (inside the git folder)
 
+## Modify start_google_assistant.sh file
+Edit the file `start_google_assistant.sh` with your own `--project-id` and `--device-model-id` you created in the previous steps.
+
 ## Setting up PulseAudio
 1. `sudo apt install -y pulseaudio paprefs pavucontrol`
 2. `sudo reboot`
@@ -48,6 +51,9 @@ To make sure the SDK also works outside the virtual environment, run the command
 `sudo cp default.pa default.pa.bak`
 
 **@TODO**: Add changes you need to make (maybe add config files?)
+
+## Modify animatronic_mouth.py file
+If needed, edit the file `animatronic_mouth.py` with your own PulseAudio monitor output.
 
 ## Installing Motor Hat software
 https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi/installing-software
@@ -130,6 +136,6 @@ More information: [Running a script after an internet connection is established]
 
 ---
 
-## Credits:
+### Credits:
 
 - [aarmea](https://github.com/aarmea) - For his `animatronic_mouth.py` script (Which we have adapted to our needs)

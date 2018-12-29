@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 """
+Original file: https://gist.github.com/aarmea/f3010fd58629acda9c458e883ee010b5
+---------
 animatronic_mouth.py
 
 This script animates a motorized mouth on a Raspberry Pi GPIO pin so that it
@@ -11,6 +13,7 @@ Find PA_SOURCE with `pactl list` and look for a monitor device that corresponds
 to your output device.
 
 See here for a detailed discussion: https://albertarmea.com/post/alexa-tree/
+---------
 """
 
 import atexit
