@@ -220,12 +220,16 @@ Paste the following code:
 Description=Google Assistant Service
 Wants=network-online.target
 After=network-online.target
+StartLimitIntervalSec=90
+StartLimitBurst=3
 
 [Service]
 Type=simple
 User=pi
 WorkingDirectory=/home/pi/kaliber-billy-bassistant/
 ExecStart=/home/pi/kaliber-billy-bassistant/start_google_assistant.sh
+Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
@@ -251,12 +255,16 @@ Paste the following code:
 [Unit]
 Description=Billy Bass Mouth Service
 After=sound.target
+StartLimitIntervalSec=90
+StartLimitBurst=3
 
 [Service]
 Type=simple
 User=pi
 WorkingDirectory=/home/pi/kaliber-billy-bassistant/
 ExecStart=/home/pi/kaliber-billy-bassistant/start_mouth_script.sh
+Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
